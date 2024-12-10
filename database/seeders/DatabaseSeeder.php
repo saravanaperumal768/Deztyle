@@ -2,9 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Size;
+use App\Models\Color;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Address;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +19,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        foreach (dbStates() as $state) {
+            State::create(['name' => $state]);
+        }
+
+        foreach (dbRoles() as $role) {
+            Role::create(['name' => $role]);
+        }
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'admin@example.com',
+            'role_id' => 1,
         ]);
+
+        if(env('DEZTYLE_ALLOW_FAKE_DATA', false)) {
+            foreach (dbSizes() as $size) {
+                Size::create($size);
+            }
+
+            foreach (dbColors() as $color) {
+                Color::create($color);
+            }
+
+            foreach (dbCategories() as $category) {
+                Category::create($category);
+            }
+
+            Product::factory(300)->create();
+
+            User::factory(50)->create([
+                'role_id' => 2,
+            ]);
+
+            Address::factory(500)->create();
+        }
     }
 }
