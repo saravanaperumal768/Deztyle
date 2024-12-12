@@ -15,3 +15,8 @@
 
 # wishlists - id, customer_id, product_id
 # carts - id, customer_id, product_detail_id, qty
+
+# shop 
+# cart, myaccount
+# Wishlist
+# Address

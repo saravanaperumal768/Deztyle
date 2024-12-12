@@ -29,10 +29,15 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+// new
+    public function productDetail()
+{
+    return $this->hasOne(ProductDetail::class);
+}
 
     public function productDetails()
     {
-        return $this->hasMany(ProductDetail::class);
+        return $this->hasMany(ProductDetail::class,'product_id');
     }
 
     public function wishlists()

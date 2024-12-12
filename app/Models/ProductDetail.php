@@ -20,6 +20,11 @@ class ProductDetail extends Model
             'stock' => 'integer',
         ];
     }
+// ProductDetail.php
+public function products()
+{
+    return $this->belongsTo(Product::class);
+}
 
     public function product()
     {
